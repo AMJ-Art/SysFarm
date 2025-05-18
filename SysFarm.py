@@ -54,3 +54,5 @@ class Maquiagem(Produto):
 RemedioTeste = Remedios("Paracetamol", 20.00, 40, "Amarela")
 
 print(RemedioTeste.nome,' ', RemedioTeste.valor, ' ', RemedioTeste.qtd, ' ', RemedioTeste.tarja)
+
+#Comentario
