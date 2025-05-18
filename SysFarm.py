@@ -1,9 +1,5 @@
 #Grupo: Artur Mesquita Jaeger & João Paulo da Silva Franceschi
 
-from datetime import date
-
-#adicionar data nos produtos alimenticios
-
 class Produto:
 
     nome    = "sem nome"
@@ -29,12 +25,12 @@ class Remedios(Produto):
 
 class Higiene(Produto):
 
-    tipoProd = {"pessoal", "intima", "bucal"}
+    tipoH = {"pessoal", "intima", "bucal"}
 
     def __init__(self, nome, valor, qtd, tipo):
         super().__init__(nome, valor, qtd)
 
-        if tipo not in self.tipoProd:
+        if tipo not in self.tipoH:
             raise ValueError(f"Tipo invalido. Use uma destes: {self.tipoProd}")
 
         self.tipo = tipo
@@ -45,14 +41,18 @@ class Alimenticios(Produto):
         super().__init__(nome, valor, qtd)
         self.validade = validade
 
-class Maquiagem(Produto):
+class Beleza(Produto):
 
-    def __init__(self, nome, valor, qtd):
+    tipoB = {"creme", "esmalte", "batom"}
+
+    def __init__(self, nome, valor, qtd, tipo):
         super().__init__(nome, valor, qtd)
+        
+        if tipo not in self.tipoB:
+            raise ValueError(f"Tipo invalido. Use um destes: {self.tipoB}")
 
 
 RemedioTeste = Remedios("Paracetamol", 20.00, 40, "Amarela")
 
 print(RemedioTeste.nome,' ', RemedioTeste.valor, ' ', RemedioTeste.qtd, ' ', RemedioTeste.tarja)
 
-#Comentario ainda mais novo
