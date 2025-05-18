@@ -1,5 +1,4 @@
 
-
 class Produto:
 
     nome    = "sem nome"
@@ -50,3 +49,4 @@ class Beleza(Produto):
         
         if tipo not in self.tipoB:
             raise ValueError(f"Tipo invalido. Use um destes: {self.tipoB}")
+        
