@@ -1,41 +1,35 @@
 #Grupo: Artur Mesquita Jaeger & João Paulo da Silva Franceschi
 
-import ClasseProduto
+import classeProduto
+import defs
 
-def main():
+ListaEstoque = []
 
-    ListaEstoque = []
+"""
+"Merthiolate - esprei", "Clonasepa - Preta", "Ibuprofeno - Amarela", "Pringles", "Barra de cereal", "Creme - Nivea", "esmalte laranja", "Papel Higiênico", "Pasta de Dente"
+"""
+rep = True
 
-    """
-    "Merthiolate - esprei", "Clonasepa - Preta", "Ibuprofeno - Amarela", "Pringles", "Barra de cereal", "Creme - Nivea", "esmalte laranja", "Papel Higiênico", "Pasta de Dente"
-    """
+while(rep):
 
     print("------------------------ Menu ------------------------")
     print("Digite para acessar: (1)Listar (2)Adicionar (3)Alterar")
     print("------------------------------------------------------")
 
-    while(1):
+    valor = input()
 
-        valor = input()
+    match valor:
 
-        def switch(valor):
-            match valor:
+        case '1' | 'listar':
+            defs.listar(ListaEstoque)
 
-                case 1:
-                    listar()
+        case '2' | 'adicionar':
+            defs.adicionar(ListaEstoque)
 
-                case 2:
-                    adicionar()
+        case '3' | 'alterar':
+            defs.alterar()
 
-                case 3:
-                    alterar()
-                    
+        case '0':
+            print("Saiu")
+            rep = False
 
-def listar():
-    pass
-
-def adicionar():
-    pass
-
-def alterar():
-    pass
