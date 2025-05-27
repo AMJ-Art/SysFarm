@@ -12,13 +12,12 @@ rep = True
 
 while(rep):
 
-    print("------------------------ Menu ------------------------")
-    print("Digite para acessar: (1)Listar (2)Adicionar (3)Alterar")
-    print("------------------------------------------------------")
+    print("----------------------------- Menu -----------------------------")
+    print("Digite para acessar: (1)Listar (2)Adicionar (3)Modificar (0)Sair")
+    print("----------------------------------------------------------------")
 
-    valor = input()
-
-    match valor:
+    tag = input()
+    match tag:
 
         case '1' | 'listar':
             defs.listar(ListaEstoque)
@@ -26,8 +25,8 @@ while(rep):
         case '2' | 'adicionar':
             defs.adicionar(ListaEstoque)
 
-        case '3' | 'alterar':
-            defs.alterar()
+        case '3' | 'modificar':
+            defs.modificar(ListaEstoque)
 
         case '0':
             print("Saiu")
