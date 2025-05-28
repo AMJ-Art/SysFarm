@@ -6,17 +6,16 @@ import defs
 ListaEstoque = []
 
 """
-"Merthiolate - esprei", "Clonasepa - Preta", "Ibuprofeno - Amarela", "Pringles", "Barra de cereal", "Creme - Nivea", "esmalte laranja", "Papel Higiênico", "Pasta de Dente"
+ "Clonasepa - Preta", "Ibuprofeno - Amarela", "Pringles", "Barra de cereal", "Creme - Nivea", "esmalte laranja", "Papel Higiênico",   "Pasta de Dente"
 """
-rep = True
 
-while(rep):
+while(1):
 
-    print("----------------------------- Menu -----------------------------")
+    print("----------------------------- MENU -----------------------------")
     print("Digite para acessar: (1)Listar (2)Adicionar (3)Modificar (0)Sair")
     print("----------------------------------------------------------------")
-
     tag = input()
+    
     match tag:
 
         case '1' | 'listar':
@@ -30,5 +29,4 @@ while(rep):
 
         case '0':
             print("Saiu")
-            rep = False
-
+            break

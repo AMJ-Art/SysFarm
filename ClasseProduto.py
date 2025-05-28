@@ -1,18 +1,19 @@
 
-class Produto:
+class Produto:  #Super Classe
 
+    #Constructor(1)
     nome    = "sem nome"
     valor   = 0
     qtd     = 0
 
-    def __init__(self, nome, valor, qtd):
+    def __init__(self, nome, valor, qtd): #Constructor(2)
         self.nome   =  nome
         self.valor  = valor
         self.qtd    =   qtd
 
-class Remedios(Produto):
+class Remedio(Produto):
 
-    TarjasValidas = {"Indefinida", "Amarela", "Vermelha", "Preta"}
+    TarjasValidas = {"indefinida", "amarela", "vermelha", "preta"}
 
     def __init__(self, nome, valor, qtd, tarja = "Indefinida"):
         super().__init__(nome, valor, qtd) # 'super' é utilizado para chamar o método pai
@@ -24,29 +25,25 @@ class Remedios(Produto):
 
 class Higiene(Produto):
 
-    tipoH = {"pessoal", "intima", "bucal"}
+    areaDeAplique = {"pessoal", "intima", "bucal"}
 
-    def __init__(self, nome, valor, qtd, tipo):
+    def __init__(self, nome, valor, qtd, area):
         super().__init__(nome, valor, qtd)
 
-        if tipo not in self.tipoH:
+        if area not in self.areaDeAplique:
             raise ValueError(f"Tipo invalido. Use uma destes: {self.tipoProd}")
+        self.area = area
 
-        self.tipo = tipo
-
-class Alimenticios(Produto):
+class Alimenticio(Produto):
 
     def __init__(self, nome, valor, qtd, validade = "Deve-se atualizar"):
         super().__init__(nome, valor, qtd)
         self.validade = validade
 
-class Beleza(Produto):
+class Cosmetico(Produto):
 
-    tipoB = {"creme", "esmalte", "batom"}
+    tipoDeAplique = {"creme", "esmalte", "batom"}
 
-    def __init__(self, nome, valor, qtd, tipo):
+    def __init__(self, nome, valor, qtd):
         super().__init__(nome, valor, qtd)
-        
-        if tipo not in self.tipoB:
-            raise ValueError(f"Tipo invalido. Use um destes: {self.tipoB}")
-        
+
