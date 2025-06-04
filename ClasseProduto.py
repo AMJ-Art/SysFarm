@@ -25,25 +25,12 @@ class Remedio(Produto):
 
 class Higiene(Produto):
 
-    areaDeAplique = {"pessoal", "intima", "bucal"}
-
-    def __init__(self, nome, valor, qtd, area):
+    def __init__(self, nome, valor, qtd):
         super().__init__(nome, valor, qtd)
-
-        if area not in self.areaDeAplique:
-            raise ValueError(f"Tipo invalido. Use uma destes: {self.tipoProd}")
-        self.area = area
 
 class Alimenticio(Produto):
 
     def __init__(self, nome, valor, qtd, validade = "Deve-se atualizar"):
         super().__init__(nome, valor, qtd)
         self.validade = validade
-
-class Cosmetico(Produto):
-
-    tipoDeAplique = {"creme", "esmalte", "batom"}
-
-    def __init__(self, nome, valor, qtd):
-        super().__init__(nome, valor, qtd)
 
