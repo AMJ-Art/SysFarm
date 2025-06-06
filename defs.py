@@ -1,8 +1,8 @@
 from classeProduto import Remedio, Higiene, Alimenticio
 from classeEstoque import Estoque
+import warnings
 
 #Pacote de funções
-#adicionar seguintes regras de negócios: def de promoções & def de dispara aviso quando pouco produto em estoque
 
 def selectEst(list1, list2):
     print("----------------------------------------------------")
@@ -16,10 +16,6 @@ def selectEst(list1, list2):
             return list1
         case '2':
             return list2
-        
-def listWay(list):
-    pass
-
 
 # Listar os produtos armazenados
 def listar(list):
@@ -54,20 +50,32 @@ def adicionar(list):
             objeto   = Remedio(nome, valor, qtd, tarja)
 
         case 'higiene':
-            tipoH    = input('Insira tipo de especialização do produto: ')
             objeto   = Higiene(nome, valor, qtd)
 
         case 'alimenticio':
             validade = input('Insira a validade do produto: ')
             objeto   = Alimenticio(nome, valor, qtd, validade)
-
+    
     list.addProduto(objeto)
     print("O objeto foi criado e adicionado na lista")
+    qtdEstoque(objeto.qtd)
+
     return 0
 
 # Modifica um objeto na lista
 def modificar(list):
-    print("----------------------------------------------")
+    print("---------------------------------------------------------------------")
+    print("Escolha se deseja modificar um produto(1) ou adicionr uma promoção(2)")
+    tag = input()
+
+    match tag:
+        case "1":
+            modProduto()
+        case "2":
+            promocao()
+
+def modProduto():
+
     obj = input("Escreva o nome do produto que desaja alterar: ")
 
     for i in list.produtos:
@@ -93,6 +101,7 @@ def modificar(list):
                     dado = input("Coloque a nova quantidade: ")
                     i.qtd = dado
                     print("Edição realizada com sucesso!")
+                    qtdEstoque(i.qtd)
 
         else:
             print("Produto não encontrado")
@@ -148,3 +157,17 @@ def insertInicial(list):
     list.addProduto(Higiene('Pasta de dente - Colgate', 5.00, 12))
 
     return list
+
+#adicionar seguintes regras de negócios: def de promoções & def de dispara aviso quando pouco produto em estoque
+
+#Regra de negócio(1): verificação de quantidade do estoque
+def qtdEstoque(qtd):
+    if(qtd < 4):
+        warnings.warn(f"Aviso: pouca quantidade de {qtd}", UserWarning)
+
+#Regra de negócio(2): Muda os preços dos produtos, os colocando em promoção
+def promocao():
+
+    print("Qual produto ou classificação deseja alterar?")
+    tag = input()
+
