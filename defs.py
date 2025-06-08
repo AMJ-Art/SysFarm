@@ -1,33 +1,20 @@
 from classeProduto import Remedio, Higiene, Alimenticio
 from classeEstoque import Estoque
-import warnings
 
 #Pacote de funções
-
-def selectEst(list1, list2):
-    print("----------------------------------------------------")
-    print("Selecione em qual estoque sera efetuada a operação: ")
-    print("---- Armazem Geral(1) --- Estoque de pedidos(2) ----")
-    print("")
-    list0 = input()
-
-    match list0:
-        case '1':
-            return list1
-        case '2':
-            return list2
 
 # Listar os produtos armazenados
 def listar(list):
     i = 0
+    
     for produto in list.produtos:
         i += 1
         if  (type(produto) == Higiene):
-            print(f"Código {i:>2}:  Nome:{produto.nome:<30} Valor:{produto.valor:>6}  Quantidade:{produto.qtd:>3}  Especialidade:NULL")
+            print(f"Código {i:>2}:  Nome:{produto.nome:<30} Valor:{produto.valor:>6}  Quantidade:{produto.qtd:>3}  {produto.esp()}:NULL")
         elif(type(produto) == Remedio):
-            print(f"Código {i:>2}:  Nome:{produto.nome:<30} Valor:{produto.valor:>6}  Quantidade:{produto.qtd:>3}  Especialidade:{produto.tarja}")
+            print(f"Código {i:>2}:  Nome:{produto.nome:<30} Valor:{produto.valor:>6}  Quantidade:{produto.qtd:>3}  {produto.esp()}:{produto.tarja}")
         elif(type(produto) == Alimenticio):
-            print(f"Código {i:>2}:  Nome:{produto.nome:<30} Valor:{produto.valor:>6}  Quantidade:{produto.qtd:>3}  Especialidade:{produto.validade}")
+            print(f"Código {i:>2}:  Nome:{produto.nome:<30} Valor:{produto.valor:>6}  Quantidade:{produto.qtd:>3}  {produto.esp()}:{produto.validade}")
         else:
             ValueError("Erro: produto adicionado incorretamente!")
 
@@ -57,28 +44,32 @@ def adicionar(list):
             objeto   = Alimenticio(nome, valor, qtd, validade)
     
     list.addProduto(objeto)
-    print("O objeto foi criado e adicionado na lista")
-    qtdEstoque(objeto.qtd)
+    print          ("O Produto foi criado com sucesso!")
+    qtdEstoque     (objeto.qtd, objeto.nome)
 
     return 0
 
-# Modifica um objeto na lista
+# Intarface de escolha entre modificar ou colocar produto em promoção
 def modificar(list):
+    print()
     print("---------------------------------------------------------------------")
-    print("Escolha se deseja modificar um produto(1) ou adicionr uma promoção(2)")
-    tag = input()
+    print("------ Modificar um produto(1) ----- adicionar uma promoção(2) ------")
+    print()
 
+    tag = input()
     match tag:
         case "1":
-            modProduto()
+            modProduto(list)
         case "2":
-            promocao()
+            promocao  (list)
 
-def modProduto():
+# Modifca um Objeto
+def modProduto(list):
 
     obj = input("Escreva o nome do produto que desaja alterar: ")
 
     for i in list.produtos:
+
         if(i.nome == obj): 
             print("---")
             print(f"Produto: {i.nome} Valor: {i.valor} Quantidade: {i.qtd}")
@@ -102,13 +93,14 @@ def modProduto():
                     i.qtd = dado
                     print("Edição realizada com sucesso!")
                     qtdEstoque(i.qtd)
-
         else:
             print("Produto não encontrado")
 
-# Cria um objeto do tipo Produto(Sem subClasse)
+#Cria um objeto do tipo Produto(Sem subClasse)
 def criaObj():
+
     try:
+
         nome   = input('Insira um nome: ')
         if((verificaFloat(nome)) == 'erro'):
             raise ValueError()
@@ -126,23 +118,26 @@ def criaObj():
         print("Erro: valores de inserção inválidos!")
         return None
 
-# Usado para verificar se a String não é apenas números
+#Usado para verificar se a String não é apenas números
 def verificaNum(valor):
+    
     if(type(valor) == int | type(valor) == float):
        return True
     return False
 
-# Usado para verificar se não é int ou float
+#Usado para verificar se não é int ou float
 def verificaFloat(input):
+
     try:
         float(input)
         print(f"Erro: {input} é um nome inadequado")
         print("Por favor, reinicie a operação...")
         return 'erro'
-    
+
     except ValueError as e:
         return input
 
+# Faz um insert de produtos padrões
 def insertInicial(list):
 
     list.addProduto(Remedio('Clonazepam', 20.99, 5, 'preta'))
@@ -158,16 +153,29 @@ def insertInicial(list):
 
     return list
 
-#adicionar seguintes regras de negócios: def de promoções & def de dispara aviso quando pouco produto em estoque
-
-#Regra de negócio(1): verificação de quantidade do estoque
-def qtdEstoque(qtd):
+#Regra de negócio(1): aviso quando há pouca quantidade de determinado produto no estoque
+def qtdEstoque(qtd, nome):
     if(qtd < 4):
-        warnings.warn(f"Aviso: pouca quantidade de {qtd}", UserWarning)
+        print(f"Aviso: pouca quantidade de {nome}, apenas {qtd} no estoque")
 
 #Regra de negócio(2): Muda os preços dos produtos, os colocando em promoção
-def promocao():
+def promocao(list):
 
-    print("Qual produto ou classificação deseja alterar?")
-    tag = input()
+    print()
+    desc = float(input("Insira o valor equivalente do desconto: "))
 
+    print()
+    print("Digite o(s) produto(s) que serão afetados: ")
+    tags  = input()
+
+    listaTags = tags.split()
+
+    for i in listaTags:
+        for j in list:
+            if(i == j.nome):
+                j.valor = calculoPromo(desc, j.valor)
+
+# Calcula o valor da porcentagem
+def calculoPromo(perc, valor):
+    valor = valor - (valor * (perc * 0.01))
+    return valor

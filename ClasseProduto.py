@@ -1,5 +1,5 @@
 
-class Produto:  #Super Classe
+class Produto:  #Super Classe(1)
 
     #Constructor(1)
     nome    = "sem nome"
@@ -11,6 +11,11 @@ class Produto:  #Super Classe
         self.valor  = valor
         self.qtd    =   qtd
 
+    #Exemplo de substituição("def esp' funciona de modo diferente de acordo com cada subclasse)
+    def esp(self):
+        return "NULL"
+        
+#Sub classe Remedio (2)
 class Remedio(Produto):
 
     TarjasValidas = {"indefinida", "amarela", "vermelha", "preta"}
@@ -23,14 +28,24 @@ class Remedio(Produto):
         
         self.tarja = tarja
 
+    def esp(self):
+        return "Tarja"
+
+#Sub classe Higiene(3)
 class Higiene(Produto):
 
     def __init__(self, nome, valor, qtd):
         super().__init__(nome, valor, qtd)
 
+    def esp(self):
+        return "NULL"
+
+#Sub classe Alimenticio(4)
 class Alimenticio(Produto):
 
     def __init__(self, nome, valor, qtd, validade = "Deve-se atualizar"):
         super().__init__(nome, valor, qtd)
         self.validade = validade
 
+    def esp(self):
+        return "Validade"
