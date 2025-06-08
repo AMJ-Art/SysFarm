@@ -51,10 +51,10 @@ def adicionar(list):
 
 # Intarface de escolha entre modificar ou colocar produto em promoção
 def modificar(list):
-    print()
+
     print("---------------------------------------------------------------------")
     print("------ Modificar um produto(1) ----- adicionar uma promoção(2) ------")
-    print()
+    print("---------------------------------------------------------------------")
 
     tag = input()
     match tag:
@@ -120,7 +120,7 @@ def criaObj():
 
 #Usado para verificar se a String não é apenas números
 def verificaNum(valor):
-    
+
     if(type(valor) == int | type(valor) == float):
        return True
     return False
